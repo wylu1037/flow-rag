@@ -115,6 +115,8 @@ pnpm test:api
 
 Python 依赖统一由 `uv` 管理。新增或调整后端依赖后，在 `apps/api` 下运行 `uv --cache-dir .uv-cache lock` 并提交生成的 `uv.lock`。
 
+如果希望开发环境直接使用免费托管云服务，而不是本地部署数据库、Redis 和对象存储，参考 [免费托管开发环境](docs/dev-cloud-services.md)。
+
 ## 总体架构
 
 ```mermaid
@@ -830,6 +832,22 @@ GET /api/health/live
 | `admin` | 管理知识库和文档 |
 | `member` | 使用被授权的知识库问答 |
 | `viewer` | 只读问答和查看引用 |
+
+## API 中间件
+
+当前 FastAPI MVP 已接入以下 ASGI 中间件：
+
+| 中间件 | 作用 |
+|---|---|
+| Request context | 接收或生成 `trace_id`，写入 `request.state.trace_id`，并返回 `X-Trace-Id` / `X-Request-Id` |
+| Principal context | 从 `X-Tenant-Id`、`X-User-Id`、`X-Role` 解析租户和用户上下文 |
+| Access log | 输出结构化访问日志，包含路径、状态码、耗时、租户、用户和 trace |
+| Request size limit | 按 `FLOWRAG_MAX_REQUEST_BYTES` 在解析 body 前拒绝过大请求 |
+| Rate limit | 按租户/用户或 client 做本地 fixed-window 限流，配置项为 `FLOWRAG_RATE_LIMIT_WINDOW_SECONDS` 和 `FLOWRAG_RATE_LIMIT_MAX_REQUESTS` |
+| Security headers | 返回 `X-Content-Type-Options`、`X-Frame-Options`、`Referrer-Policy`、`Permissions-Policy` |
+| CORS | 允许本地前端开发地址访问 API |
+
+本地限流器是 MVP 实现，只适合单进程开发。生产部署时应替换为 Redis-backed limiter，保证多副本 API 之间共享限流状态。
 
 ## 可观测性
 

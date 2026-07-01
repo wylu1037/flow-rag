@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from fastapi import Header
+from fastapi import Header, Request
 
 from app.agent.flows.rag_flow import AgenticRAGFlow
 from app.core.security import Principal, principal_from_headers
@@ -34,8 +34,12 @@ chat_service = ChatService(repository, rag_flow, citation_service)
 
 
 def get_principal(
+    request: Request,
     x_tenant_id: str | None = Header(default=None),
     x_user_id: str | None = Header(default=None),
     x_role: str | None = Header(default=None),
 ) -> Principal:
+    principal = getattr(request.state, "principal", None)
+    if principal is not None:
+        return principal
     return principal_from_headers(x_tenant_id, x_user_id, x_role)

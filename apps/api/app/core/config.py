@@ -17,6 +17,9 @@ class Settings:
     max_rewritten_queries: int = int(os.getenv("FLOWRAG_MAX_REWRITTEN_QUERIES", "3"))
     max_candidate_chunks: int = int(os.getenv("FLOWRAG_MAX_CANDIDATE_CHUNKS", "80"))
     max_evidence_chunks: int = int(os.getenv("FLOWRAG_MAX_EVIDENCE_CHUNKS", "10"))
+    max_request_bytes: int = int(os.getenv("FLOWRAG_MAX_REQUEST_BYTES", "6291456"))
+    rate_limit_window_seconds: int = int(os.getenv("FLOWRAG_RATE_LIMIT_WINDOW_SECONDS", "60"))
+    rate_limit_max_requests: int = int(os.getenv("FLOWRAG_RATE_LIMIT_MAX_REQUESTS", "600"))
 
 
 settings = Settings()
