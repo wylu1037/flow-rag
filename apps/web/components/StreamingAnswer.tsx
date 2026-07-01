@@ -3,10 +3,18 @@ import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export function StreamingAnswer({ messages, loading }: { messages: ChatMessage[]; loading: boolean }) {
+export function StreamingAnswer({
+  messages,
+  loading,
+  className
+}: {
+  messages: ChatMessage[];
+  loading: boolean;
+  className?: string;
+}) {
   return (
     <ScrollArea
-      className="h-[420px] rounded-lg bg-surface-dark text-on-dark md:h-[520px]"
+      className={cn("h-[420px] rounded-lg bg-surface-dark text-on-dark md:h-[520px]", className)}
       viewportClassName="flex flex-col gap-3 p-5"
     >
       {messages.length === 0 ? (

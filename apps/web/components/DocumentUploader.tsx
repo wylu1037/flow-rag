@@ -54,11 +54,11 @@ export function DocumentUploader({
 
   return (
     <Card className="min-w-0">
-      <CardHeader>
-        <CardTitle className="text-[18px]">Upload</CardTitle>
+      <CardHeader className="p-5">
+        <CardTitle className="text-[16px]">Upload</CardTitle>
         <CardDescription>Text is indexed immediately in the local MVP.</CardDescription>
       </CardHeader>
-      <CardContent className="grid min-w-0 gap-4">
+      <CardContent className="grid min-w-0 gap-3 p-5 pt-0">
         <label className="grid min-w-0 gap-2 text-sm">
           <span className="font-medium text-foreground">Dataset</span>
           <span className="relative block w-full min-w-0 max-w-full">

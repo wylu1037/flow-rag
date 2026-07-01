@@ -14,7 +14,6 @@ import { TracePanel } from "./TracePanel";
 import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export function ChatShell() {
@@ -100,16 +99,19 @@ export function ChatShell() {
   }
 
   return (
-    <div className="grid min-h-[calc(100dvh-9rem)] grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
-      <section className="flex min-h-0 flex-col gap-4">
-        <header className="grid gap-6 border-b border-border pb-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-            <div>
-              <Badge variant="secondary" className="uppercase tracking-[0.12em]">Agentic RAG</Badge>
-              <h1 className="font-display mt-4 text-[44px] leading-[1.05] tracking-[-0.04em] text-ink md:text-[56px]">
-                FlowRAG workspace
+    <div className="grid min-h-[calc(100dvh-8rem)] grid-cols-1 gap-5 xl:grid-cols-[minmax(0,1fr)_360px]">
+      <section className="grid min-h-[680px] grid-rows-[auto_minmax(0,1fr)] overflow-hidden rounded-lg border border-border bg-card xl:min-h-[calc(100dvh-8rem)]">
+        <header className="grid gap-4 border-b border-border bg-card p-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end md:p-5">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge variant="secondary" className="font-mono">Agentic RAG</Badge>
+                <span className="font-mono text-xs text-muted-foreground">{indexedCount} indexed docs</span>
+              </div>
+              <h1 className="mt-3 text-[22px] font-semibold leading-tight text-ink md:text-[26px]">
+                Chat workspace
               </h1>
-              <p className="mt-4 max-w-[68ch] text-base leading-[1.55] text-body">
-                {indexedCount} indexed documents / API {API_BASE}
+              <p className="mt-1 truncate text-sm text-muted-foreground">
+                API {API_BASE}
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
@@ -125,33 +127,38 @@ export function ChatShell() {
             </div>
         </header>
 
-        {error ? (
-          <Alert variant="destructive">{error}</Alert>
-        ) : null}
+        <div className="flex min-h-0 flex-col">
+          {error ? (
+            <div className="border-b border-border p-4">
+              <Alert variant="destructive">{error}</Alert>
+            </div>
+          ) : null}
 
-        {loading ? (
-          <Card className="min-h-[420px] bg-surface-dark text-on-dark">
-            <CardContent className="grid gap-3 p-6">
+          {loading ? (
+            <div className="grid min-h-0 flex-1 content-start gap-3 bg-surface-dark p-5 text-on-dark">
               <Skeleton className="h-5 w-40 bg-on-dark-soft/20" />
               <Skeleton className="h-24 bg-on-dark-soft/15" />
               <Skeleton className="h-24 bg-on-dark-soft/15" />
-            </CardContent>
-          </Card>
-        ) : datasets.length === 0 ? (
-          <EmptyState title="No datasets" detail="Create a dataset before starting a grounded chat." />
-        ) : (
-          <StreamingAnswer messages={messages} loading={sending} />
-        )}
+            </div>
+          ) : datasets.length === 0 ? (
+            <div className="min-h-0 flex-1 bg-background p-4">
+              <EmptyState title="No datasets" detail="Create a dataset before starting a grounded chat." />
+            </div>
+          ) : (
+            <StreamingAnswer messages={messages} loading={sending} className="h-auto min-h-0 flex-1 rounded-none md:h-auto" />
+          )}
 
-        <ChatComposer
-          value={input}
-          disabled={sending || loading || !selectedDatasetId}
-          onChange={setInput}
-          onSubmit={sendMessage}
-        />
+          <ChatComposer
+            value={input}
+            disabled={sending || loading || !selectedDatasetId}
+            onChange={setInput}
+            onSubmit={sendMessage}
+            className="rounded-none border-x-0 border-b-0 border-t border-border bg-card"
+          />
+        </div>
       </section>
 
-      <aside className="grid content-start gap-5">
+      <aside className="grid content-start gap-4 xl:sticky xl:top-20">
         <DocumentUploader
           datasets={datasets}
           selectedDatasetId={selectedDatasetId}

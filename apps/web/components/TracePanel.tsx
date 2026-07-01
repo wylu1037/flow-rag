@@ -9,14 +9,14 @@ export function TracePanel({ trace }: { trace: TracePayload | null }) {
   const steps = trace?.flow_steps ?? [];
   return (
     <Card className="border-surface-dark bg-surface-dark text-on-dark">
-      <CardHeader className="flex-row items-center justify-between gap-3">
+      <CardHeader className="flex-row items-center justify-between gap-3 p-5">
         <CardTitle className="text-sm text-on-dark">Trace</CardTitle>
         <Badge className="border-surface-dark-elevated bg-surface-dark-elevated font-mono text-on-dark">
           {trace?.latency_ms ?? 0} ms
         </Badge>
       </CardHeader>
-      <CardContent>
-        <ScrollArea className="h-[240px] rounded-md">
+      <CardContent className="p-5 pt-0">
+        <ScrollArea className="h-[210px] rounded-md">
           {steps.length === 0 ? (
             <Alert className="border-surface-dark-elevated bg-surface-dark-soft text-on-dark-soft">
               No trace captured yet.

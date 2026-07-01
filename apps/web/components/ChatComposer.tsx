@@ -3,21 +3,24 @@
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 
 export function ChatComposer({
   value,
   disabled,
   onChange,
-  onSubmit
+  onSubmit,
+  className
 }: {
   value: string;
   disabled: boolean;
   onChange: (value: string) => void;
   onSubmit: () => void;
+  className?: string;
 }) {
   return (
     <form
-      className="surface rounded-lg p-3"
+      className={cn("surface rounded-lg p-3", className)}
       onSubmit={(event) => {
         event.preventDefault();
         onSubmit();
@@ -31,7 +34,7 @@ export function ChatComposer({
             onChange={(event) => onChange(event.target.value)}
             rows={3}
             placeholder="Ask about indexed documents"
-            className="min-h-[112px] pr-16"
+            className="min-h-[104px] pr-16"
           />
           <Button
             type="submit"
