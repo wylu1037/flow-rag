@@ -24,7 +24,10 @@ export default function DocumentsPage() {
     setLoading(true);
     setError(null);
     try {
-      const [datasetList, documentList] = await Promise.all([api.listDatasets(), api.listDocuments()]);
+      const [datasetList, documentList] = await Promise.all([
+        api.listDatasets(),
+        api.listDocuments()
+      ]);
       setDatasets(datasetList);
       setDocuments(documentList);
     } catch (err) {
@@ -44,8 +47,10 @@ export default function DocumentsPage() {
         <Card>
           <CardHeader className="gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <Badge variant="secondary" className="font-mono uppercase">Documents</Badge>
-              <h1 className="font-display mt-3 text-[40px] leading-[1.08] tracking-[-0.04em] text-ink md:text-[48px]">
+              <Badge variant="secondary" className="font-mono uppercase">
+                Documents
+              </Badge>
+              <h1 className="mt-3 font-display text-[40px] leading-[1.08] tracking-[-0.04em] text-ink md:text-[48px]">
                 Ingestion queue
               </h1>
             </div>
@@ -55,20 +60,25 @@ export default function DocumentsPage() {
             </Button>
           </CardHeader>
           <CardContent>
-          {error ? (
-            <Alert variant="destructive" className="mb-4">{error}</Alert>
-          ) : null}
-          {loading ? (
-            <div className="grid gap-2">
-              <Skeleton className="h-14" />
-              <Skeleton className="h-14" />
-              <Skeleton className="h-14" />
-            </div>
-          ) : documents.length === 0 ? (
-            <EmptyState title="No indexed documents" detail="Upload a text or markdown source to create retrievable chunks." />
-          ) : (
-            <DocumentTable documents={documents} />
-          )}
+            {error ? (
+              <Alert variant="destructive" className="mb-4">
+                {error}
+              </Alert>
+            ) : null}
+            {loading ? (
+              <div className="grid gap-2">
+                <Skeleton className="h-14" />
+                <Skeleton className="h-14" />
+                <Skeleton className="h-14" />
+              </div>
+            ) : documents.length === 0 ? (
+              <EmptyState
+                title="No indexed documents"
+                detail="Upload a text or markdown source to create retrievable chunks."
+              />
+            ) : (
+              <DocumentTable documents={documents} />
+            )}
           </CardContent>
         </Card>
         <aside>

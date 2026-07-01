@@ -7,6 +7,8 @@
     "dev:api": "cd apps/api && uv --cache-dir .uv-cache run uvicorn app.main:app --reload --port 8000",
     "dev:web": "cd apps/web && pnpm --config.verify-deps-before-run=false dev",
     "build:web": "cd apps/web && pnpm --config.verify-deps-before-run=false build",
+    "format:web": "cd apps/web && pnpm --config.verify-deps-before-run=false format",
+    "format:check:web": "cd apps/web && pnpm --config.verify-deps-before-run=false format:check",
     "lint:api": "cd apps/api && uv --cache-dir .uv-cache run ruff check app tests",
     "lint:web": "cd apps/web && pnpm --config.verify-deps-before-run=false lint",
     "test:api": "cd apps/api && uv --cache-dir .uv-cache run --no-sync python -m unittest discover -s tests"

@@ -30,7 +30,10 @@ export function DocumentTable({ documents }: { documents: Document[] }) {
                     <p className="truncate font-medium text-ink" title={document.filename}>
                       {document.filename}
                     </p>
-                    <p className="truncate font-mono text-xs text-muted-foreground" title={document.content_hash}>
+                    <p
+                      className="truncate font-mono text-xs text-muted-foreground"
+                      title={document.content_hash}
+                    >
                       {document.content_hash}
                     </p>
                   </div>
@@ -39,7 +42,9 @@ export function DocumentTable({ documents }: { documents: Document[] }) {
                   <JobStatusBadge status={document.status} />
                 </TableCell>
                 <TableCell>
-                  <time className="text-xs text-muted-foreground">{new Date(document.created_at).toLocaleString()}</time>
+                  <time className="text-xs text-muted-foreground">
+                    {new Date(document.created_at).toLocaleString()}
+                  </time>
                 </TableCell>
               </TableRow>
             ))}

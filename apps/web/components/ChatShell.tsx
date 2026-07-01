@@ -3,7 +3,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { api, API_BASE } from "@/lib/api";
-import type { ChatMessage, ChatSession, Citation, Dataset, Document, TracePayload } from "@/lib/types";
+import type {
+  ChatMessage,
+  ChatSession,
+  Citation,
+  Dataset,
+  Document,
+  TracePayload
+} from "@/lib/types";
 import { ChatComposer } from "./ChatComposer";
 import { CitationList } from "./CitationList";
 import { DatasetSelector } from "./DatasetSelector";
@@ -42,7 +49,9 @@ export function ChatShell() {
       setDatasets(datasetList);
       setDocuments(documentList);
       setSession(activeSession);
-      setSelectedDatasetIds((current) => current.length ? current : datasetList.slice(0, 1).map((item) => item.id));
+      setSelectedDatasetIds((current) =>
+        current.length ? current : datasetList.slice(0, 1).map((item) => item.id)
+      );
       const hydrated = await api.getSession(activeSession.id);
       setMessages(hydrated.messages ?? []);
     } catch (err) {
@@ -101,30 +110,32 @@ export function ChatShell() {
   return (
     <div className="grid min-h-[calc(100dvh-8rem)] grid-cols-1 gap-5 xl:grid-cols-[minmax(0,1fr)_360px]">
       <section className="grid min-h-[680px] grid-rows-[auto_minmax(0,1fr)] overflow-hidden rounded-lg border border-border bg-card xl:min-h-[calc(100dvh-8rem)]">
-        <header className="grid gap-4 border-b border-border bg-card p-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end md:p-5">
-            <div className="min-w-0">
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge variant="secondary" className="font-mono">Agentic RAG</Badge>
-                <span className="font-mono text-xs text-muted-foreground">{indexedCount} indexed docs</span>
-              </div>
-              <h1 className="mt-3 text-[22px] font-semibold leading-tight text-ink md:text-[26px]">
-                Chat workspace
-              </h1>
-              <p className="mt-1 truncate text-sm text-muted-foreground">
-                API {API_BASE}
-              </p>
+        <header className="grid gap-4 border-b border-border bg-card p-4 md:p-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge variant="secondary" className="font-mono">
+                Agentic RAG
+              </Badge>
+              <span className="font-mono text-xs text-muted-foreground">
+                {indexedCount} indexed docs
+              </span>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-              <DatasetSelector
-                datasets={datasets}
-                selectedIds={selectedDatasetIds}
-                onChange={setSelectedDatasetIds}
-              />
-              <Button variant="outline" onClick={() => void load()}>
-                <ReloadIcon className="h-4 w-4" />
-                Refresh
-              </Button>
-            </div>
+            <h1 className="mt-3 text-[22px] font-semibold leading-tight text-ink md:text-[26px]">
+              Chat workspace
+            </h1>
+            <p className="mt-1 truncate text-sm text-muted-foreground">API {API_BASE}</p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+            <DatasetSelector
+              datasets={datasets}
+              selectedIds={selectedDatasetIds}
+              onChange={setSelectedDatasetIds}
+            />
+            <Button variant="outline" onClick={() => void load()}>
+              <ReloadIcon className="h-4 w-4" />
+              Refresh
+            </Button>
+          </div>
         </header>
 
         <div className="flex min-h-0 flex-col">
@@ -142,10 +153,17 @@ export function ChatShell() {
             </div>
           ) : datasets.length === 0 ? (
             <div className="min-h-0 flex-1 bg-background p-4">
-              <EmptyState title="No datasets" detail="Create a dataset before starting a grounded chat." />
+              <EmptyState
+                title="No datasets"
+                detail="Create a dataset before starting a grounded chat."
+              />
             </div>
           ) : (
-            <StreamingAnswer messages={messages} loading={sending} className="h-auto min-h-0 flex-1 rounded-none md:h-auto" />
+            <StreamingAnswer
+              messages={messages}
+              loading={sending}
+              className="h-auto min-h-0 flex-1 rounded-none md:h-auto"
+            />
           )}
 
           <ChatComposer

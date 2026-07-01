@@ -23,5 +23,5 @@ export function useAsync<T>(loader: () => Promise<T>) {
     void reload();
   }, [reload]);
 
-  return {data, error, loading, reload};
+  return { data, error, loading, reload };
 }

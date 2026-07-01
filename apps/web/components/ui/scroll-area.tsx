@@ -20,7 +20,7 @@ export const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
       <div
         ref={ref}
         className={cn(
-          "no-scrollbar h-full w-full rounded-[inherit] overscroll-contain",
+          "no-scrollbar h-full w-full overscroll-contain rounded-[inherit]",
           overflowByOrientation[orientation],
           viewportClassName
         )}

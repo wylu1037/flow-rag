@@ -42,7 +42,7 @@ export default function DatasetsPage() {
     setSaving(true);
     setError(null);
     try {
-      await api.createDataset({name: name.trim(), description: description.trim()});
+      await api.createDataset({ name: name.trim(), description: description.trim() });
       setName("");
       setDescription("");
       await load();
@@ -63,8 +63,10 @@ export default function DatasetsPage() {
         <Card>
           <CardHeader className="gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <Badge variant="secondary" className="font-mono uppercase">Datasets</Badge>
-              <h1 className="font-display mt-3 text-[40px] leading-[1.08] tracking-[-0.04em] text-ink md:text-[48px]">
+              <Badge variant="secondary" className="font-mono uppercase">
+                Datasets
+              </Badge>
+              <h1 className="mt-3 font-display text-[40px] leading-[1.08] tracking-[-0.04em] text-ink md:text-[48px]">
                 Knowledge bases
               </h1>
             </div>
@@ -74,33 +76,45 @@ export default function DatasetsPage() {
             </Button>
           </CardHeader>
           <CardContent>
-          {error ? (
-            <Alert variant="destructive" className="mb-4">{error}</Alert>
-          ) : null}
-          {loading ? (
-            <div className="grid gap-3">
-              <Skeleton className="h-20" />
-              <Skeleton className="h-20" />
-            </div>
-          ) : datasets.length === 0 ? (
-            <EmptyState title="No datasets" detail="Create a knowledge base to scope document retrieval." />
-          ) : (
-            <div className="grid gap-3">
-              {datasets.map((dataset) => (
-                <article key={dataset.id} className="rounded-lg border border-border bg-background p-5">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="min-w-0">
-                      <h2 className="truncate text-[18px] font-medium text-ink">{dataset.name}</h2>
-                      <p className="mt-1 text-sm leading-6 text-muted-foreground">{dataset.description || "No description"}</p>
+            {error ? (
+              <Alert variant="destructive" className="mb-4">
+                {error}
+              </Alert>
+            ) : null}
+            {loading ? (
+              <div className="grid gap-3">
+                <Skeleton className="h-20" />
+                <Skeleton className="h-20" />
+              </div>
+            ) : datasets.length === 0 ? (
+              <EmptyState
+                title="No datasets"
+                detail="Create a knowledge base to scope document retrieval."
+              />
+            ) : (
+              <div className="grid gap-3">
+                {datasets.map((dataset) => (
+                  <article
+                    key={dataset.id}
+                    className="rounded-lg border border-border bg-background p-5"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="min-w-0">
+                        <h2 className="truncate text-[18px] font-medium text-ink">
+                          {dataset.name}
+                        </h2>
+                        <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                          {dataset.description || "No description"}
+                        </p>
+                      </div>
+                      <span className="shrink-0 rounded-md border border-border px-2 py-1 font-mono text-xs text-muted-foreground">
+                        {dataset.id}
+                      </span>
                     </div>
-                    <span className="shrink-0 rounded-md border border-border px-2 py-1 font-mono text-xs text-muted-foreground">
-                      {dataset.id}
-                    </span>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
+                  </article>
+                ))}
+              </div>
+            )}
           </CardContent>
         </Card>
         <Card className="h-fit">
@@ -111,10 +125,7 @@ export default function DatasetsPage() {
           <CardContent className="grid gap-3">
             <label className="grid gap-2 text-sm">
               <span className="font-medium text-foreground">Name</span>
-              <Input
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-              />
+              <Input value={name} onChange={(event) => setName(event.target.value)} />
             </label>
             <label className="grid gap-2 text-sm">
               <span className="font-medium text-foreground">Description</span>
@@ -124,10 +135,7 @@ export default function DatasetsPage() {
                 rows={4}
               />
             </label>
-            <Button
-              onClick={() => void create()}
-              disabled={saving}
-            >
+            <Button onClick={() => void create()} disabled={saving}>
               <PlusIcon className="h-4 w-4" />
               Create
             </Button>

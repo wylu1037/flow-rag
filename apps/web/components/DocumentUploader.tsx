@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArchiveIcon, ChevronDownIcon, FileTextIcon, ReloadIcon, UploadIcon } from "@radix-ui/react-icons";
+import {
+  ArchiveIcon,
+  ChevronDownIcon,
+  FileTextIcon,
+  ReloadIcon,
+  UploadIcon
+} from "@radix-ui/react-icons";
 import { api } from "@/lib/api";
 import type { Dataset, UploadResponse } from "@/lib/types";
 import { Alert } from "@/components/ui/alert";
@@ -79,7 +85,7 @@ export function DocumentUploader({
         </label>
         <label className="grid min-w-0 gap-2 text-sm">
           <span className="font-medium text-foreground">File</span>
-          <span className="group relative flex min-h-12 w-full min-w-0 max-w-full cursor-pointer items-center gap-3 rounded-md border border-dashed border-input bg-background px-3.5 py-3 text-sm outline-none transition-[background-color,border-color,box-shadow,transform] hover:border-primary/60 hover:bg-secondary focus-within:border-primary focus-within:ring-4 focus-within:ring-ring/15 active:translate-y-[1px]">
+          <span className="group relative flex min-h-12 w-full min-w-0 max-w-full cursor-pointer items-center gap-3 rounded-md border border-dashed border-input bg-background px-3.5 py-3 text-sm outline-none transition-[background-color,border-color,box-shadow,transform] focus-within:border-primary focus-within:ring-4 focus-within:ring-ring/15 hover:border-primary/60 hover:bg-secondary active:translate-y-[1px]">
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border bg-surface-soft text-muted-foreground transition-colors group-hover:text-foreground">
               <FileTextIcon className="h-4 w-4" />
             </span>
@@ -90,7 +96,9 @@ export function DocumentUploader({
               >
                 {selectedFileName || "Select a text or markdown source"}
               </span>
-              <span className="mt-0.5 block text-xs text-muted-foreground">TXT, MD, or Markdown</span>
+              <span className="mt-0.5 block text-xs text-muted-foreground">
+                TXT, MD, or Markdown
+              </span>
             </span>
             <span className="hidden shrink-0 rounded-full border border-border bg-card px-2.5 py-1 text-xs font-medium text-muted-foreground min-[380px]:inline-flex">
               Browse
@@ -110,7 +118,11 @@ export function DocumentUploader({
           disabled={busy || datasets.length === 0}
           className="w-full max-w-full"
         >
-          {busy ? <ReloadIcon className="h-4 w-4 animate-spin" /> : <UploadIcon className="h-4 w-4" />}
+          {busy ? (
+            <ReloadIcon className="h-4 w-4 animate-spin" />
+          ) : (
+            <UploadIcon className="h-4 w-4" />
+          )}
           Upload
         </Button>
       </CardContent>

@@ -20,7 +20,9 @@ export function StreamingAnswer({
       {messages.length === 0 ? (
         <div className="flex h-full min-h-[340px] items-center justify-center text-center">
           <div>
-            <p className="font-display text-[28px] leading-tight tracking-[-0.03em] text-on-dark">No messages yet</p>
+            <p className="font-display text-[28px] leading-tight tracking-[-0.03em] text-on-dark">
+              No messages yet
+            </p>
             <p className="mt-3 max-w-[44ch] text-sm leading-6 text-on-dark-soft">
               Indexed documents will ground the first answer here.
             </p>

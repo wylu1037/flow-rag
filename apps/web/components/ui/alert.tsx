@@ -14,7 +14,11 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   ({ className, variant = "default", ...props }, ref) => (
-    <div ref={ref} className={cn("rounded-md border p-3 text-sm leading-6", variants[variant], className)} {...props} />
+    <div
+      ref={ref}
+      className={cn("rounded-md border p-3 text-sm leading-6", variants[variant], className)}
+      {...props}
+    />
   )
 );
 Alert.displayName = "Alert";

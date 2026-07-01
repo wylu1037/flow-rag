@@ -15,7 +15,9 @@ export function AppFrame({ children }: { children: ReactNode }) {
         <div className="mx-auto flex min-h-16 max-w-[1200px] flex-col gap-3 px-4 py-3 md:flex-row md:items-center md:justify-between md:px-6 md:py-0">
           <Link href="/chat" className="flex items-center gap-3 text-ink" aria-label="FlowRAG chat">
             <AnthropicMark />
-            <span className="font-display text-[24px] leading-none tracking-[-0.03em]">FlowRAG</span>
+            <span className="font-display text-[24px] leading-none tracking-[-0.03em]">
+              FlowRAG
+            </span>
           </Link>
           <nav className="flex flex-wrap items-center gap-1">
             {navItems.map((item) => (
@@ -41,9 +43,7 @@ export function AppFrame({ children }: { children: ReactNode }) {
           </div>
         </div>
       </header>
-      <div className="mx-auto w-full max-w-[1200px] px-4 py-8 md:px-6 md:py-10">
-        {children}
-      </div>
+      <div className="mx-auto w-full max-w-[1200px] px-4 py-8 md:px-6 md:py-10">{children}</div>
     </main>
   );
 }
