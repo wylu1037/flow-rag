@@ -17,7 +17,7 @@ export function ChatComposer({
 }) {
   return (
     <form
-      className="surface grid gap-3 rounded-lg p-3"
+      className="surface rounded-lg p-3"
       onSubmit={(event) => {
         event.preventDefault();
         onSubmit();
@@ -25,22 +25,25 @@ export function ChatComposer({
     >
       <label className="grid gap-2">
         <span className="text-sm font-medium text-foreground">Question</span>
-        <Textarea
-          value={value}
-          onChange={(event) => onChange(event.target.value)}
-          rows={3}
-          placeholder="Ask about indexed documents"
-        />
+        <span className="relative block">
+          <Textarea
+            value={value}
+            onChange={(event) => onChange(event.target.value)}
+            rows={3}
+            placeholder="Ask about indexed documents"
+            className="min-h-[112px] pr-16"
+          />
+          <Button
+            type="submit"
+            size="icon"
+            disabled={disabled}
+            aria-label="Send message"
+            className="absolute bottom-3 right-3 h-10 w-10"
+          >
+            <PaperPlaneIcon className="h-4 w-4" />
+          </Button>
+        </span>
       </label>
-      <div className="flex items-center justify-end">
-        <Button
-          type="submit"
-          disabled={disabled}
-        >
-          <PaperPlaneIcon className="h-4 w-4" />
-          Send
-        </Button>
-      </div>
     </form>
   );
 }

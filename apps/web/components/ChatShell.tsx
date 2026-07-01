@@ -101,7 +101,7 @@ export function ChatShell() {
 
   return (
     <div className="grid min-h-[calc(100dvh-9rem)] grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
-      <section className="grid min-h-0 grid-rows-[auto_minmax(0,1fr)_auto] gap-5">
+      <section className="flex min-h-0 flex-col gap-4">
         <header className="grid gap-6 border-b border-border pb-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
             <div>
               <Badge variant="secondary" className="uppercase tracking-[0.12em]">Agentic RAG</Badge>

@@ -1,10 +1,14 @@
 import type { ChatMessage } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export function StreamingAnswer({ messages, loading }: { messages: ChatMessage[]; loading: boolean }) {
   return (
-    <div className="no-scrollbar flex min-h-[420px] flex-1 flex-col gap-3 overflow-y-auto rounded-lg bg-surface-dark p-5 text-on-dark">
+    <ScrollArea
+      className="h-[420px] rounded-lg bg-surface-dark text-on-dark md:h-[520px]"
+      viewportClassName="flex flex-col gap-3 p-5"
+    >
       {messages.length === 0 ? (
         <div className="flex h-full min-h-[340px] items-center justify-center text-center">
           <div>
@@ -36,6 +40,6 @@ export function StreamingAnswer({ messages, loading }: { messages: ChatMessage[]
           <Skeleton className="h-3 w-1/2 bg-on-dark-soft/20" />
         </div>
       ) : null}
-    </div>
+    </ScrollArea>
   );
 }
