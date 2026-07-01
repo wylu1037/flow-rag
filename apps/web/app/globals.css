@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  --font-display: "Copernicus", "Tiempos Headline", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --font-geist-sans: "StyreneB", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-geist-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --background: 45 33% 97%;
+  --foreground: 60 2% 8%;
+  --body: 60 2% 23%;
+  --body-strong: 60 3% 14%;
+  --card: 39 33% 90%;
+  --card-foreground: 60 2% 8%;
+  --popover: 45 33% 97%;
+  --popover-foreground: 60 2% 8%;
+  --primary: 14 50% 58%;
+  --primary-active: 15 46% 45%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 45 33% 97%;
+  --secondary-foreground: 60 2% 8%;
+  --muted: 36 24% 92%;
+  --muted-foreground: 43 4% 41%;
+  --muted-soft: 40 5% 53%;
+  --accent: 39 33% 90%;
+  --accent-foreground: 60 2% 8%;
+  --destructive: 0 52% 52%;
+  --destructive-foreground: 0 0% 100%;
+  --success: 133 37% 54%;
+  --warning: 43 79% 46%;
+  --border: 34 23% 87%;
+  --input: 34 23% 87%;
+  --ring: 14 50% 58%;
+  --surface-soft: 36 39% 94%;
+  --surface-cream-strong: 37 33% 87%;
+  --surface-dark: 40 7% 9%;
+  --surface-dark-elevated: 40 7% 14%;
+  --surface-dark-soft: 45 7% 11%;
+  --on-dark: 45 33% 97%;
+  --on-dark-soft: 40 3% 61%;
+  --radius: 0.5rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: hsl(var(--primary) / 0.2);
+}
+
+.surface {
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

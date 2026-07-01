@@ -1,0 +1,14 @@
+{
+  "name": "flowrag",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "scripts": {
+    "dev:api": "cd apps/api && uv --cache-dir .uv-cache run uvicorn app.main:app --reload --port 8000",
+    "dev:web": "cd apps/web && pnpm --config.verify-deps-before-run=false dev",
+    "build:web": "cd apps/web && pnpm --config.verify-deps-before-run=false build",
+    "lint:api": "cd apps/api && uv --cache-dir .uv-cache run ruff check app tests",
+    "lint:web": "cd apps/web && pnpm --config.verify-deps-before-run=false lint",
+    "test:api": "cd apps/api && uv --cache-dir .uv-cache run --no-sync python -m unittest discover -s tests"
+  }
+}
