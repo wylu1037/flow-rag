@@ -1,26 +1,30 @@
 import type { TracePayload } from "@/lib/types";
 import { StopwatchIcon } from "@radix-ui/react-icons";
+import { EmptyState } from "@/components/EmptyState";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert } from "@/components/ui/alert";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function TracePanel({ trace }: { trace: TracePayload | null }) {
   const steps = trace?.flow_steps ?? [];
   return (
     <Card className="border-surface-dark bg-surface-dark text-on-dark">
-      <CardHeader className="flex-row items-center justify-between gap-3 p-5">
-        <CardTitle className="text-sm text-on-dark">Trace</CardTitle>
-        <Badge className="border-surface-dark-elevated bg-surface-dark-elevated font-mono text-on-dark">
+      <CardHeader className="!flex-row items-center justify-between gap-3 p-5">
+        <CardTitle className="shrink-0 whitespace-nowrap text-sm text-on-dark">Trace</CardTitle>
+        <Badge className="shrink-0 border-surface-dark-elevated bg-surface-dark-elevated font-mono text-on-dark">
           {trace?.latency_ms ?? 0} ms
         </Badge>
       </CardHeader>
       <CardContent className="p-5 pt-0">
         <ScrollArea className="h-[210px] rounded-md">
           {steps.length === 0 ? (
-            <Alert className="border-surface-dark-elevated bg-surface-dark-soft text-on-dark-soft">
-              No trace captured yet.
-            </Alert>
+            <EmptyState
+              compact
+              variant="dark"
+              icon={StopwatchIcon}
+              title="No trace"
+              detail="No trace captured yet."
+            />
           ) : (
             <div className="divide-y divide-surface-dark-elevated rounded-md border border-surface-dark-elevated bg-surface-dark-soft">
               {steps.map((step) => (

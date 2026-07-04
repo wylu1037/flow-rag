@@ -1,25 +1,27 @@
 import type { Citation } from "@/lib/types";
 import { ReaderIcon } from "@radix-ui/react-icons";
+import { EmptyState } from "@/components/EmptyState";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert } from "@/components/ui/alert";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function CitationList({ citations }: { citations: Citation[] }) {
   return (
     <Card>
-      <CardHeader className="flex-row items-center justify-between gap-3 p-5">
-        <CardTitle className="text-sm">Citations</CardTitle>
-        <Badge variant="outline" className="font-mono">
-          {citations.length}1
+      <CardHeader className="!flex-row items-center justify-between gap-3 p-5">
+        <CardTitle className="shrink-0 whitespace-nowrap text-sm">Citations</CardTitle>
+        <Badge variant="outline" className="shrink-0 font-mono">
+          {citations.length}
         </Badge>
       </CardHeader>
       <CardContent className="p-5 pt-0">
         <ScrollArea className="h-[190px] rounded-md" viewportClassName="grid gap-2">
           {citations.length === 0 ? (
-            <Alert className="border-dashed text-muted-foreground">
-              No citations for the current answer.
-            </Alert>
+            <EmptyState
+              compact
+              title="No citations"
+              detail="No citations for the current answer."
+            />
           ) : (
             citations.map((citation) => (
               <article

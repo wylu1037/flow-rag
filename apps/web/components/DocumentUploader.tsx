@@ -1,13 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import {
-  ArchiveIcon,
-  ChevronDownIcon,
-  FileTextIcon,
-  ReloadIcon,
-  UploadIcon
-} from "@radix-ui/react-icons";
+import { ArchiveIcon, FileTextIcon, ReloadIcon, UploadIcon } from "@radix-ui/react-icons";
 import { api } from "@/lib/api";
 import type { Dataset, UploadResponse } from "@/lib/types";
 import { Alert } from "@/components/ui/alert";
@@ -29,6 +23,7 @@ export function DocumentUploader({
   const [selectedFileName, setSelectedFileName] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const datasetLabelId = "document-upload-dataset-label";
 
   useEffect(() => {
     if (selectedDatasetId) {
@@ -65,24 +60,20 @@ export function DocumentUploader({
         <CardDescription>Text is indexed immediately in the local MVP.</CardDescription>
       </CardHeader>
       <CardContent className="grid min-w-0 gap-3 p-5 pt-0">
-        <label className="grid min-w-0 gap-2 text-sm">
-          <span className="font-medium text-foreground">Dataset</span>
-          <span className="relative block w-full min-w-0 max-w-full">
-            <ArchiveIcon className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Select
-              value={datasetId || selectedDatasetId}
-              onChange={(event) => setDatasetId(event.target.value)}
-              className="max-w-full appearance-none truncate pl-10 pr-10"
-            >
-              {datasets.map((dataset) => (
-                <option key={dataset.id} value={dataset.id}>
-                  {dataset.name}
-                </option>
-              ))}
-            </Select>
-            <ChevronDownIcon className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <div className="grid min-w-0 gap-2 text-sm">
+          <span id={datasetLabelId} className="font-medium text-foreground">
+            Dataset
           </span>
-        </label>
+          <Select
+            value={datasetId || selectedDatasetId}
+            onValueChange={setDatasetId}
+            options={datasets.map((dataset) => ({ value: dataset.id, label: dataset.name }))}
+            placeholder="Select dataset"
+            aria-labelledby={datasetLabelId}
+            leadingIcon={<ArchiveIcon className="h-4 w-4" />}
+            className="max-w-full"
+          />
+        </div>
         <label className="grid min-w-0 gap-2 text-sm">
           <span className="font-medium text-foreground">File</span>
           <span className="group relative flex min-h-12 w-full min-w-0 max-w-full cursor-pointer items-center gap-3 rounded-md border border-dashed border-input bg-background px-3.5 py-3 text-sm outline-none transition-[background-color,border-color,box-shadow,transform] focus-within:border-primary focus-within:ring-4 focus-within:ring-ring/15 hover:border-primary/60 hover:bg-secondary active:translate-y-[1px]">

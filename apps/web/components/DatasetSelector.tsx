@@ -1,5 +1,6 @@
 "use client";
 
+import { ArchiveIcon } from "@radix-ui/react-icons";
 import type { Dataset } from "@/lib/types";
 import { Select } from "@/components/ui/select";
 
@@ -12,20 +13,22 @@ export function DatasetSelector({
   selectedIds: string[];
   onChange: (ids: string[]) => void;
 }) {
+  const labelId = "chat-knowledge-base-label";
+
   return (
-    <label className="grid gap-2 text-sm">
-      <span className="font-medium text-foreground">Knowledge base</span>
+    <div className="grid gap-2 text-sm">
+      <span id={labelId} className="font-medium text-foreground">
+        Knowledge base
+      </span>
       <Select
         value={selectedIds[0] ?? ""}
-        onChange={(event) => onChange(event.target.value ? [event.target.value] : [])}
+        onValueChange={(nextValue) => onChange(nextValue ? [nextValue] : [])}
+        options={datasets.map((dataset) => ({ value: dataset.id, label: dataset.name }))}
+        placeholder="Select knowledge base"
+        aria-labelledby={labelId}
+        leadingIcon={<ArchiveIcon className="h-4 w-4" />}
         className="min-w-[220px]"
-      >
-        {datasets.map((dataset) => (
-          <option key={dataset.id} value={dataset.id}>
-            {dataset.name}
-          </option>
-        ))}
-      </Select>
-    </label>
+      />
+    </div>
   );
 }
